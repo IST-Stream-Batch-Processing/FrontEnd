@@ -12,4 +12,8 @@ export default StyleSheet.create({
         marginTop: 12,
         minHeight: 280,
     },
+    breadCrumbs: {
+        marginLeft: 24,
+        marginBottom: 12
+    }
 });

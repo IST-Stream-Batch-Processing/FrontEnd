@@ -7,6 +7,7 @@ import TitleBar from './TitleBar';
 import Footer from './Footer';
 import SiderWrapper from './SiderWrapper';
 import handleToken from '../utils/handleToken';
+import PageBreadcrumbs from "./PageBreadcrumbs";
 
 const {Content} = Layout;
 
@@ -19,6 +20,7 @@ export default function pageWrapper(items, routes, props) {
                 <SiderWrapper items={items} />
                 <Layout className={css(styles.content)}>
                     <Content className={css(styles.mainContent)}>
+                        <PageBreadcrumbs routes={routes} />
                         {routes.map((route) => (
                                 <Route
                                     exact
