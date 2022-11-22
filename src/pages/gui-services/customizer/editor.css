@@ -1,0 +1,297 @@
+.root-div{
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------------------------------------通用---------------------------------------------- */
+.title-font{
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* ---------------------------------------编辑器Editor---------------------------------------------- */
+
+.customizer-page-header {
+    height: 6vh;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    padding: 0 30px 0 30px;
+    z-index: 15;
+}
+
+.customizer-right-btn-grp {
+    position: absolute;
+    right: 30px;
+    width: 450px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#editor-customize-area {
+    display: flex;
+    width: 100vw;
+    height: 94vh;
+    z-index: 0;
+}
+
+/* ---------------------------------------侧边栏---------------------------------------------- */
+
+/*#customizer-sidebar {*/
+/*    width: 12vw !important;*/
+/*    height: 100%;*/
+/*    box-shadow: 1px 2px 2px -2px rgba(0, 0, 0, 0.12);*/
+/*    padding: 24px;*/
+/*}*/
+
+#properties-panel{
+    width: 20vw;
+    height: 94vh;
+    z-index: 14;
+    box-shadow: -2px 4px 2px 2px rgba(0, 0, 0, 0.12);
+}
+
+.customizer-component-btn {
+    height: 6vh !important;
+    width: 40% !important;
+    margin: 5% !important;
+    font-size: 12px !important;
+    font-weight: bold;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* ---------------------------------------画布---------------------------------------------- */
+
+#customizer-canvas {
+    width: 80vw;
+    height: 94vh;
+    background-color: #4E4E4E;
+    z-index: 1;
+}
+
+#customizer-canvas-page {
+    height: 76vh;
+    width: 76vw;
+    margin: 9vh 2vw 9vh 2vw;
+}
+
+.client-view {
+    margin-top: 2px;
+    height: 94vh;
+    width: 100vw;
+}
+
+/* 编辑器与客户端界面共用 */
+.layout-view {
+    background-color: white;
+}
+
+.custom-div {
+    position: relative;
+}
+
+.element {
+    margin: 0 ;
+}
+
+/* 只有编辑器内的画布(容器)元素有 */
+.canvas-element {
+    border-width: thin;
+    border-style: dashed;
+    border-color: lightgray;
+}
+
+.client-element {
+    border-left: thin solid lightgray;
+    border-right: thin solid lightgray;
+    box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.06);
+}
+
+/* 只有编辑器内的画布(组件)元素有 */
+.canvas-component {
+    cursor: move;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.control-point {
+    position: absolute;
+    box-sizing: border-box;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #c10e16;
+    box-shadow: 0 0 2px 0 rgba(86, 90, 98, .2);
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: -8px !important;
+    margin-left: -8px !important;
+    user-select: none;
+}
+
+.control-point.point-e {
+    cursor: ew-resize;
+    left: 100%;
+    top: 50%;
+    margin-left: 1px;
+}
+
+.control-point.point-n {
+    cursor: ns-resize;
+    left: 50%;
+    margin-top: -1px;
+}
+
+.control-point.point-s {
+    cursor: ns-resize;
+    left: 50%;
+    top:100%;
+    margin-top: 1px;
+}
+
+.control-point.point-w {
+    cursor: ew-resize;
+    top: 50%;
+    left: 0;
+    margin-left: -1px;
+}
+
+.control-point.point-ne {
+    cursor: nesw-resize;
+    left: 100%;
+    margin-top: -1px;
+    margin-left: 1px;
+}
+
+.control-point.point-nw {
+    cursor: nwse-resize;
+    margin-left: -1px;
+    margin-top: -1px;
+}
+
+.control-point.point-se {
+    cursor: nwse-resize;
+    left: 100%;
+    top: 100%;
+    margin-left: 1px;
+    margin-top: 1px;
+}
+
+.control-point.point-sw {
+    cursor: nesw-resize;
+    top: 100%;
+    margin-left: -1px;
+    margin-top: 1px;
+}
+
+/* 只有悬浮到的画布元素有 */
+.hover-canvas-element {
+    box-shadow: 0 0 6px rgb(35, 173, 255) !important;
+}
+
+.focus-canvas-element {
+    border: 2px dashed rgba(30,144,255,80%) !important;
+    box-shadow: 0 0 24px lightblue !important;
+}
+
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
+}
+
+/* ---------------------------------------输入变量编辑---------------------------------------------- */
+.input-panel {
+    flex: 1;
+    margin-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    overflow-y: auto;
+}
+
+/* ---------------------------------------界面元素Hierarchy---------------------------------------------- */
+
+#customizer-hierarchy {
+    height: 100%;
+    width: 26vw;
+    padding-top: 10px;
+}
+
+/* ---------------------------------------属性编辑面板---------------------------------------------- */
+
+.customizer-custom-panel {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #e8e8e8;
+    height: 94vh;
+    padding: 24px 24px 0 24px;
+    margin-top: 10px !important;
+    -ms-overflow-style: none; /* Edge, Internet Explorer */
+    overflow-y: scroll;
+}
+
+.customizer-custom-panel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+#customizer-properties-bottom-btn-grp {
+    border-top: thin solid rgba(0, 0, 0, 0.18);
+    margin-top: 20px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background-color: white;
+}
+
+#customizer-properties-form {
+    flex: 24;
+    display: flex;
+    flex-direction: column;
+}
+
+#customizer-form-area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.customizer-bottom-btn {
+    float: right;
+    width: 28%;
+    height: 130% !important;
+}
+
+Table {
+    left: 0
+}
+
+.ant-layout {
+    background: white !important;
+}
+
+.ant-tabs .ant-tabs-right-content {
+    padding-right: 0 !important;
+    border-right: none !important;
+}
+
+.tool-tab {
+    /*display: flex;*/
+    /*flex-direction: column;*/
+}
+
+.pdt-5 {
+    padding-top: 5px;
+}
+
+.tab-icon {
+    font-size: 20px;
+}

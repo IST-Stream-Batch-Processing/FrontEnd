@@ -1,0 +1,27 @@
+div.login-form {
+    text-align: center;
+    background-color: white;
+    width: 400px;
+    padding: 20px 20px 20px 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 0 10px #4E4E4E;
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    /* 设置元素的相对于自身的偏移度为负50%(也就是元素自身尺寸的一半)*/
+    transform: translate(-50%, -50%);
+}
+
+.login-text {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.login-item {
+    margin-top: 30px;
+}
+
+.login-button {
+    width: 100px;
+}

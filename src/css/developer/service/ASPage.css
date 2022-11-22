@@ -1,0 +1,8 @@
+.operator {
+    display: flex;
+    justify-content: center;
+}
+.headerButtons {
+    display: flex;
+    flex-flow: row-reverse;
+}

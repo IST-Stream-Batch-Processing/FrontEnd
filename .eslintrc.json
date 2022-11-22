@@ -1,0 +1,79 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jquery": true,
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules":{
+    "react/jsx-props-no-spreading": "off",
+    "no-named-as-default-member" : "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "no-nested-ternary" : "off",
+    "operator-linebreak": "off",
+    "quote-props": "off",
+    "comma-dangle": "off",
+    "arrow-parens": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-no-bind": "off",
+    "object-curly-spacing": "off",
+    "space-before-function-paren": 0,
+    "indent": "off",
+    "max-len": "off",
+    "no-class-assign": "off",
+    "react/destructuring-assignment": "off",
+    "react/jsx-indent": "off",
+    "import/prefer-default-export": "off",
+    "import/no-mutable-exports": "off",
+    "prefer-const": "off",
+    "react/button-has-type" : "off",
+    "no-console": "off",
+    "prefer-destructuring": "off",
+    "no-case-declarations": "off",
+    "react/no-array-index-key": "off",
+    "import/no-unresolved": "off",
+    "eqeqeq": "off",
+    "no-unused-vars": "off",
+    "linebreak-style": "off",
+    "react/no-unused-state": "off",
+    "no-alert": "off",
+    "react/prop-types": "off",
+    "max-classes-per-file": "off",
+    "react/style-prop-object": "off",
+    "jsx-a11y/no-static-element-interactions": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "no-param-reassign": "off",
+    "react/sort-comp": [1, {
+      "order": [
+        "constructor",
+        "lifecycle",
+        "everything-else",
+        "componentDidMount",
+        "render"
+      ]
+    }
+    ],
+    "quotes": [0, "double"]
+  }
+}
