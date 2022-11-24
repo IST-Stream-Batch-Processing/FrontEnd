@@ -14,6 +14,7 @@ export const getPathname = () => {
 const breadcrumbsMapping = {
     '/developer/layouts': '界面',
     '/developer/streamProcess/model': '流处理服务/流数据源',
+    '/developer/streamProcess/model/create': '流处理服务/流数据源/创建流数据源',
     '/developer/streamProcess/service': '流处理服务/流数据处理'
 };
 
