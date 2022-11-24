@@ -20,6 +20,7 @@ import TrainPage from './intelligence-services/service/TrainPage';
 import LayoutPage from "../gui-services/layouts/LayoutPage";
 import StreamModelPage from "./stream-services/model/StreamModelPage";
 import StreamServicePage from "./stream-services/model/StreamServicePage";
+import StreamModelCreatePage from "./stream-services/model/StreamModelCreatePage";
 
 const routes = (match) => [
   {
@@ -116,6 +117,11 @@ const routes = (match) => [
     key: 'streamProcessModelPage',
     path: `${match.url}/streamProcess/model`,
     component: StreamModelPage,
+  },
+  {
+    key: 'streamProcessModelCreatePage',
+    path: `${match.url}/streamProcess/model/create`,
+    component: StreamModelCreatePage,
   },
   {
     key: 'streamProcessServicePage',

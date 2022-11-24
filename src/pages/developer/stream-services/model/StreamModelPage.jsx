@@ -3,6 +3,7 @@ import {
 Button, Divider, Layout, Table, Tag
 } from 'antd';
 import Title from "antd/es/typography/Title";
+import {NavLink} from "react-router-dom";
 
 const {Column} = Table;
 
@@ -35,7 +36,11 @@ class StreamModelPage extends React.Component {
             <Layout>
                 <div style={{flexDirection: 'row', display: 'flex'}}>
                     <Title level={4}>流数据源</Title>
-                    <Button type="primary" style={{marginLeft: "auto"}} icon="form">创建</Button>
+                    <Button type="primary" style={{marginLeft: "auto"}} icon="form">
+                        <NavLink to="/developer/streamProcess/model/create">
+                            创建
+                        </NavLink>
+                    </Button>
                 </div>
                 <Divider />
                 <Table dataSource={data} size="small">
@@ -58,13 +63,13 @@ class StreamModelPage extends React.Component {
                         )}
                     />
                     <Column
-                        title="Action"
+                        title="操作"
                         key="action"
                         render={(text, record) => (
                             <span>
-                                <Button>{record.lastName}</Button>
+                                <Button>编辑</Button>
                                 <Divider type="vertical" />
-                                <Button type="danger">Delete</Button>
+                                <Button type="danger">删除</Button>
                             </span>
                         )}
                     />
