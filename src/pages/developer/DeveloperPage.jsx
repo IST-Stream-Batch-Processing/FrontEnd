@@ -21,6 +21,8 @@ import LayoutPage from "../gui-services/layouts/LayoutPage";
 import StreamModelPage from "./stream-services/model/StreamModelPage";
 import StreamServicePage from "./stream-services/model/StreamServicePage";
 import StreamModelCreatePage from "./stream-services/model/StreamModelCreatePage";
+import StreamModelDataPage from "./stream-services/model/StreamModelDataPage";
+import StreamModelEditPage from "./stream-services/model/StreamModelEditPage";
 
 const routes = (match) => [
   {
@@ -122,6 +124,16 @@ const routes = (match) => [
     key: 'streamProcessModelCreatePage',
     path: `${match.url}/streamProcess/model/create`,
     component: StreamModelCreatePage,
+  },
+  {
+    key: 'streamProcessModelDataPage',
+    path: `${match.url}/streamProcess/model/data`,
+    component: StreamModelDataPage,
+  },
+  {
+    key: 'streamProcessModelDataPage',
+    path: `${match.url}/streamProcess/model/edit`,
+    component: StreamModelEditPage,
   },
   {
     key: 'streamProcessServicePage',

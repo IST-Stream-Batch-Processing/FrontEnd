@@ -3,12 +3,10 @@ import {
 Button, Divider, Layout, Table, Tag
 } from 'antd';
 import Title from "antd/es/typography/Title";
-import {NavLink} from "react-router-dom";
-import history from '../../../../utils/history';
+import Column from "antd/es/table/Column";
+import history from "../../../../utils/history";
 
-const {Column} = Table;
-
-class StreamModelPage extends React.Component {
+class StreamModelDataPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -36,7 +34,7 @@ class StreamModelPage extends React.Component {
         return (
             <Layout>
                 <div style={{flexDirection: 'row', display: 'flex'}}>
-                    <Title level={4}>流数据源</Title>
+                    <Title level={4}>流数据源数据</Title>
                     <Button
                         type="primary"
                         style={{marginLeft: "auto"}}
@@ -73,17 +71,7 @@ class StreamModelPage extends React.Component {
                         key="action"
                         render={(text, record) => (
                             <span>
-                                <Button>
-                                    <NavLink to="/developer/streamProcess/model/data">
-                                        查看
-                                    </NavLink>
-                                </Button>
-                                <Divider type="vertical" />
-                                <Button>
-                                    <NavLink to="/developer/streamProcess/model/edit">
-                                        编辑
-                                    </NavLink>
-                                </Button>
+                                <Button>编辑</Button>
                                 <Divider type="vertical" />
                                 <Button type="danger">删除</Button>
                             </span>
@@ -95,4 +83,4 @@ class StreamModelPage extends React.Component {
     }
 }
 
-export default StreamModelPage;
+export default StreamModelDataPage;
