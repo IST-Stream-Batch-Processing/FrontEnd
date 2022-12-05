@@ -6,6 +6,8 @@ const getAllModelData = () => api.get(`${streamURL}/data`).then(dataHandler);
 
 const createModelData = (data) => api.post(`${streamURL}/data`, data).then(dataHandler);
 
+const deleteModelData = (id) => api.delete(`${streamURL}/data/${id}`).then(dataHandler);
+
 // const getLayoutsByProjectId = (id) => api.get(`${guiURL}/layout/project/${id}`).then(dataHandler);
 //
 // const getFrontLayoutsByProjectId = (id) => api.get(`${guiURL}/layout/project/${id}/at_front_page`).then(dataHandler);
@@ -22,5 +24,6 @@ const createModelData = (data) => api.post(`${streamURL}/data`, data).then(dataH
 
 export {
     getAllModelData,
-    createModelData
+    createModelData,
+    deleteModelData
 };
