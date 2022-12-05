@@ -18,6 +18,12 @@ const deleteServiceData = (id) => api.delete(`${streamURL}/operator/${id}`).then
 
 const getSingleServiceData = (id) => api.get(`${streamURL}/operator/${id}`).then(dataHandler);
 
+const createMCService = (data) => api.post(`${streamURL}/mapConstruct`, data).then(dataHandler);
+const createATService = (data) => api.post(`${streamURL}/ascendingTimeStamp`, data).then(dataHandler);
+const createFDCOService = (data) => api.post(`${streamURL}/filterDataClassOne`, data).then(dataHandler);
+const createKBDCService = (data) => api.post(`${streamURL}/keyByDataClass`, data).then(dataHandler);
+const createTWService = (data) => api.post(`${streamURL}/timeWindow`, data).then(dataHandler);
+
 export {
     getAllModelData,
     createModelData,
@@ -26,5 +32,10 @@ export {
     updateModelData,
     getAllServiceData,
     deleteServiceData,
-    getSingleServiceData
+    getSingleServiceData,
+    createMCService,
+    createATService,
+    createFDCOService,
+    createKBDCService,
+    createTWService
 };
