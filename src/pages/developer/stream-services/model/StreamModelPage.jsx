@@ -81,7 +81,7 @@ class StreamModelPage extends React.Component {
                 </Button>
                 <Divider type="vertical" />
                 <Button>
-                    <NavLink to="/developer/streamProcess/model/edit">
+                    <NavLink to={`/developer/streamProcess/model/${record.id}`}>
                         编辑
                     </NavLink>
                 </Button>

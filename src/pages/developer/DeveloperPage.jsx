@@ -132,7 +132,7 @@ const routes = (match) => [
   },
   {
     key: 'streamProcessModelDataPage',
-    path: `${match.url}/streamProcess/model/edit`,
+    path: `${match.url}/streamProcess/model/:id`,
     component: StreamModelEditPage,
   },
   {
