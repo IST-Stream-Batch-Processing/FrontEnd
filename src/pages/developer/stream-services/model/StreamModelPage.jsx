@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-Button, Divider, Layout, message, Table
+Button, Divider, Icon, Layout, message, Table
 } from 'antd';
 import Title from "antd/es/typography/Title";
 import {NavLink} from "react-router-dom";
@@ -46,6 +46,7 @@ class StreamModelPage extends React.Component {
   }
 
   render() {
+    console.log(this.state.data);
     return (
       <Layout>
         <div style={{flexDirection: 'row', display: 'flex'}}>
@@ -67,7 +68,12 @@ class StreamModelPage extends React.Component {
           <Column title="用户id" dataIndex="userId" key="userId" />
           <Column title="数据源文件路径" dataIndex="filePath" key="filePath" />
           <Column title="数据名称" dataIndex="className" key="className" />
-          <Column title="是否使用时间戳" dataIndex="isTimeStamp" key="isTimeStamp" />
+          <Column
+            title="是否使用时间戳"
+            render={(text, record) => (record.isTimeStamp ? (
+              <Icon type="check" />
+            ) : (<Icon type="close" />))}
+          />
           <Column title="时间戳属性名称" dataIndex="timeStampName" key="timeStampName" />
           <Column
             title="操作"
