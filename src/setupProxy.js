@@ -83,4 +83,14 @@ module.exports = (app) => {
       },
     }),
   );
+    app.use(
+        createProxyMiddleware('/streamApi', {
+            target: 'http://localhost:8081', // 可修改
+            // target: url.concat('/fileApi'),
+            changeOrigin: true,
+            pathRewrite: {
+                '^/streamApi': '',
+            },
+        }),
+    );
 };
