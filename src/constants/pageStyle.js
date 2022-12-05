@@ -15,5 +15,8 @@ export default StyleSheet.create({
     },
     breadCrumbs: {
         marginBottom: 24
+    },
+    radioButtons: {
+        marginTop: 24
     }
 });
