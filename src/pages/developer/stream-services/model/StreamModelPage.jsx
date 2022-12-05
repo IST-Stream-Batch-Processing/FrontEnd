@@ -1,98 +1,107 @@
 import React from 'react';
 import {
-Button, Divider, Layout, Table, Tag
+Button, Divider, Layout, message, Table
 } from 'antd';
 import Title from "antd/es/typography/Title";
 import {NavLink} from "react-router-dom";
 import history from '../../../../utils/history';
+import {deleteModelData, getAllModelData} from "../../../../api/stream";
 
 const {Column} = Table;
 
 class StreamModelPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+  }
 
-    render() {
-        const data = [{
-            key: '1',
-            firstName: 'John',
-            lastName: 'Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-            tags: ['nice', 'developer'],
-        }, {
-            key: '2', firstName: 'Jim', lastName: 'Green', age: 42, address: 'London No. 1 Lake Park', tags: ['loser'],
-        }, {
-            key: '3',
-            firstName: 'Joe',
-            lastName: 'Black',
-            age: 32,
-            address: 'Sidney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        }];
-
-        return (
-            <Layout>
-                <div style={{flexDirection: 'row', display: 'flex'}}>
-                    <Title level={4}>流数据源</Title>
-                    <Button
-                        type="primary"
-                        style={{marginLeft: "auto"}}
-                        icon="form"
-                        onClick={() => {
-                            history.push("/developer/streamProcess/model/create");
-                        }}
-                    >
-                        创建
-                    </Button>
-                </div>
-                <Divider />
-                <Table dataSource={data} size="small">
-                    <Column title="First Name" dataIndex="firstName" key="firstName" />
-                    <Column title="Last Name" dataIndex="lastName" key="lastName" />
-                    <Column title="Age" dataIndex="age" key="age" />
-                    <Column title="Address" dataIndex="address" key="address" />
-                    <Column
-                        title="Tags"
-                        dataIndex="tags"
-                        key="tags"
-                        render={tags => (
-                            <span>
-                                {tags.map(tag => (
-                                    <Tag color="blue" key={tag}>
-                                        {tag}
-                                    </Tag>
-                                ))}
-                            </span>
-                        )}
-                    />
-                    <Column
-                        title="操作"
-                        key="action"
-                        render={(text, record) => (
-                            <span>
-                                <Button>
-                                    <NavLink to="/developer/streamProcess/model/data">
-                                        查看
-                                    </NavLink>
-                                </Button>
-                                <Divider type="vertical" />
-                                <Button>
-                                    <NavLink to="/developer/streamProcess/model/edit">
-                                        编辑
-                                    </NavLink>
-                                </Button>
-                                <Divider type="vertical" />
-                                <Button type="danger">删除</Button>
-                            </span>
-                        )}
-                    />
-                </Table>
-            </Layout>
-        );
+  getAllData = () => {
+    try {
+      getAllModelData().then(result => {
+        this.setState(state => ({
+          data: result
+        }));
+      });
+    } catch (err) {
+      console.error(err);
     }
+  }
+
+  deleteRecord = (id) => {
+    try {
+      deleteModelData(id).then(() => {
+        this.getAllData();
+      });
+      message.success("成功删除！");
+    } catch (err) {
+      console.error(err);
+      message.error("删除失败！");
+    }
+  }
+
+  componentDidMount() {
+    this.getAllData();
+  }
+
+  render() {
+    return (
+      <Layout>
+        <div style={{flexDirection: 'row', display: 'flex'}}>
+          <Title level={4}>流数据源</Title>
+          <Button
+            type="primary"
+            style={{marginLeft: "auto"}}
+            icon="form"
+            onClick={() => {
+              history.push("/developer/streamProcess/model/create");
+            }}
+          >
+            创建
+          </Button>
+        </div>
+        <Divider />
+        <Table dataSource={this.state.data} size="small">
+          <Column title="数据源id" dataIndex="id" key="id" />
+          <Column title="用户id" dataIndex="userId" key="userId" />
+          <Column title="数据源文件路径" dataIndex="filePath" key="filePath" />
+          <Column title="数据名称" dataIndex="className" key="className" />
+          <Column title="是否使用时间戳" dataIndex="isTimeStamp" key="isTimeStamp" />
+          <Column title="时间戳属性名称" dataIndex="timeStampName" key="timeStampName" />
+          <Column
+            title="操作"
+            key="action"
+            render={(text, record) => (
+              <span>
+                <Button>
+                    <NavLink to="/developer/streamProcess/model/data">
+                        查看
+                    </NavLink>
+                </Button>
+                <Divider type="vertical" />
+                <Button>
+                    <NavLink to="/developer/streamProcess/model/edit">
+                        编辑
+                    </NavLink>
+                </Button>
+                <Divider type="vertical" />
+                <Button
+                  type="danger"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.deleteRecord(record.id);
+                  }}
+                >
+                  删除
+                </Button>
+              </span>
+            )}
+          />
+        </Table>
+      </Layout>
+    );
+  }
 }
 
 export default StreamModelPage;
