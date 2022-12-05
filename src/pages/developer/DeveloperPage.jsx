@@ -19,10 +19,12 @@ import IntelServiceList from './intelligence-services/service/ServiceList';
 import TrainPage from './intelligence-services/service/TrainPage';
 import LayoutPage from "../gui-services/layouts/LayoutPage";
 import StreamModelPage from "./stream-services/model/StreamModelPage";
-import StreamServicePage from "./stream-services/model/StreamServicePage";
+import StreamServicePage from "./stream-services/service/StreamServicePage";
 import StreamModelCreatePage from "./stream-services/model/StreamModelCreatePage";
 import StreamModelDataPage from "./stream-services/model/StreamModelDataPage";
 import StreamModelEditPage from "./stream-services/model/StreamModelEditPage";
+import StreamServiceCreatePage from "./stream-services/service/StreamServiceCreatePage";
+import StreamServiceEditPage from "./stream-services/service/StreamServiceEditPage";
 
 const routes = (match) => [
   {
@@ -139,6 +141,16 @@ const routes = (match) => [
     key: 'streamProcessServicePage',
     path: `${match.url}/streamProcess/service`,
     component: StreamServicePage,
+  },
+  {
+    key: 'streamProcessServicePage',
+    path: `${match.url}/streamProcess/service/create`,
+    component: StreamServiceCreatePage,
+  },
+  {
+    key: 'streamProcessServicePage',
+    path: `${match.url}/streamProcess/service/edit/:id`,
+    component: StreamServiceEditPage,
   },
 ];
 
