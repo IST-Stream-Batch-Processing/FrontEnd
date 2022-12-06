@@ -49,7 +49,7 @@ class StreamServicePage extends React.Component {
     return (
       <Layout>
         <div style={{flexDirection: 'row', display: 'flex'}}>
-          <Title level={4}>流数据源</Title>
+          <Title level={4}>流数据服务</Title>
           <Button
             type="primary"
             style={{marginLeft: "auto"}}
@@ -65,8 +65,7 @@ class StreamServicePage extends React.Component {
         <Table dataSource={this.state.data} size="small">
           <Column title="服务id" dataIndex="id" key="id" />
           <Column title="combinationId" dataIndex="combinationId" key="combinationId" />
-          <Column title="名称" dataIndex="name" key="name" />
-          <Column title="类型" dataIndex="type" key="type" />
+          <Column title="类型" dataIndex="name" key="name" />
           <Column title="originalType" dataIndex="originalType" key="originalType" />
           <Column title="finalType" dataIndex="finalType" key="finalType" />
           <Column title="input" dataIndex="input" key="input" />

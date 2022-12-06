@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-Button, Divider, Form, Icon, Input, Layout, List, message, Select, Switch
+Button, Divider, Form, Icon, Input, Layout, List, message, Switch
 } from 'antd';
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
@@ -168,18 +168,6 @@ class StreamModelEditPage extends React.Component {
               </Form.Item>
             </div>
           </div>
-          <Form.Item label="DataSource Id">
-            {getFieldDecorator('dataSourceId', {
-              rules: [
-                {
-                  required: false,
-                  message: "必须选择DataSource Id！"
-                }
-              ]
-            })(
-              <Select />
-            )}
-          </Form.Item>
           <Text strong style={{marginBottom: 10}}>数据源属性列表</Text>
           <List
             bordered
