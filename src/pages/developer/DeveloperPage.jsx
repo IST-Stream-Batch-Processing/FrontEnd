@@ -155,7 +155,7 @@ const routes = (match) => [
   },
   {
     key: 'streamProcessCombinationPage',
-    path: `${match.url}/streamProcess/combination/:id`,
+    path: `${match.url}/streamProcess/combination`,
     component: StreamCombinationPage,
   },
 ];
@@ -247,6 +247,13 @@ export default function developerPage(match) {
           title: '流处理服务',
           path: `${match.url}/streamProcess/service`,
           text: '流处理服务'
+        },
+        {
+          id: 7.3,
+          iconType: 'filter',
+          title: '流处理编排',
+          path: `${match.url}/streamProcess/combination`,
+          text: '流处理编排'
         }
       ]
     }

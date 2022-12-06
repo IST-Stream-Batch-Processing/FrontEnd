@@ -24,6 +24,10 @@ const createFDCOService = (data) => api.post(`${streamURL}/filterDataClassOne`, 
 const createKBDCService = (data) => api.post(`${streamURL}/keyByDataClass`, data).then(dataHandler);
 const createTWService = (data) => api.post(`${streamURL}/timeWindow`, data).then(dataHandler);
 
+const getAllCombinationData = () => api.get(`${streamURL}/combination`).then(dataHandler);
+const createCombination = (id) => api.post(`${streamURL}/combination/${id}`).then(dataHandler);
+const deleteCombination = (id) => api.delete(`${streamURL}/combination/${id}`).then(dataHandler);
+
 export {
     getAllModelData,
     createModelData,
@@ -37,5 +41,8 @@ export {
     createATService,
     createFDCOService,
     createKBDCService,
-    createTWService
+    createTWService,
+    getAllCombinationData,
+    createCombination,
+    deleteCombination
 };
