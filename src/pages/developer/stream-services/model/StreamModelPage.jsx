@@ -86,11 +86,11 @@ class StreamModelPage extends React.Component {
                 {/*    </NavLink> */}
                 {/* </Button> */}
                 {/* <Divider type="vertical" /> */}
-                 <Button type="primary">
-                    <NavLink to={`/developer/streamProcess/combination/${record.id}`}>
-                        编排
-                    </NavLink>
-                 </Button>
+                {/* <Button type="primary"> */}
+                {/*    <NavLink to={`/developer/streamProcess/combination/${record.id}`}> */}
+                {/*        编排 */}
+                {/*    </NavLink> */}
+                {/* </Button> */}
                  <Divider type="vertical" />
                 <Button>
                     <NavLink to={`/developer/streamProcess/model/edit/${record.id}`}>
