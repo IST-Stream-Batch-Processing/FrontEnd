@@ -100,7 +100,6 @@ class StreamServiceCreatePage extends Component {
             rules: [
               {
                 required: false,
-                defaultValue: true
               }
             ]
           })(
@@ -285,7 +284,6 @@ class StreamServiceCreatePage extends Component {
             rules: [
               {
                 required: false,
-                defaultValue: true
               }
             ]
           })(
@@ -409,7 +407,7 @@ class StreamServiceCreatePage extends Component {
           <Title level={4}>创建流数据服务</Title>
         </div>
         <Divider />
-        <Steps current={this.state.current}>
+        <Steps current={this.state.current} style={{marginBottom: 50}}>
           {steps.map(item => (
             <Step key={item.title} title={item.title} />
           ))}
@@ -442,8 +440,9 @@ class StreamServiceCreatePage extends Component {
                 type="primary"
                 onClick={(e) => {
                   e.preventDefault();
-                  this.createService(e);
-                  this.next();
+                  this.createService(e).then(() => {
+                    this.next();
+                  });
                 }}
               >
                 下一步

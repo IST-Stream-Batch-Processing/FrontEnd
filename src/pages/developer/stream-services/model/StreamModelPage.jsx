@@ -80,12 +80,18 @@ class StreamModelPage extends React.Component {
             key="action"
             render={(text, record) => (
               <span>
-                <Button>
-                    <NavLink to="/developer/streamProcess/model/data">
-                        查看
+                {/* <Button> */}
+                {/*    <NavLink to="/developer/streamProcess/model/data"> */}
+                {/*        查看 */}
+                {/*    </NavLink> */}
+                {/* </Button> */}
+                {/* <Divider type="vertical" /> */}
+                 <Button type="primary">
+                    <NavLink to={`/developer/streamProcess/combination/${record.id}`}>
+                        编排
                     </NavLink>
-                </Button>
-                <Divider type="vertical" />
+                 </Button>
+                 <Divider type="vertical" />
                 <Button>
                     <NavLink to={`/developer/streamProcess/model/edit/${record.id}`}>
                         编辑
