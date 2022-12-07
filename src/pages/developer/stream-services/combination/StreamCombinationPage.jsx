@@ -5,7 +5,12 @@ Button, Divider, Form, Layout, message, Modal, Select, Table
 } from "antd";
 import {NavLink} from "react-router-dom";
 import {
-createCombination, deleteCombination, getAllCombinationData, getAllModelData
+  createCombination,
+  deleteCombination,
+  generateCombination,
+  getAllCombinationData,
+  getAllModelData,
+  runCombination
 } from "../../../../api/stream";
 
 const {Column} = Table;
@@ -116,6 +121,14 @@ class StreamCombinationPage extends Component {
             key="action"
             render={(text, record) => (
               <span>
+                <Button onClick={() => { generateCombination(record.id); }}>
+                  生成
+                </Button>
+                <Divider type="vertical" />
+                <Button onClick={() => { runCombination(record.id); }}>
+                  执行
+                </Button>
+                <Divider type="vertical" />
                 <Button>
                     <NavLink to={`/developer/streamProcess/combination/edit/${record.id}`}>
                         编辑
