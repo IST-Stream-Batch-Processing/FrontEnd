@@ -28,6 +28,8 @@ const getAllCombinationData = () => api.get(`${streamURL}/combination`).then(dat
 const createCombination = (id) => api.post(`${streamURL}/combination/${id}`).then(dataHandler);
 const deleteCombination = (id) => api.delete(`${streamURL}/combination/${id}`).then(dataHandler);
 const getSingleCombinationData = (id) => api.get(`${streamURL}/combination/${id}`).then(dataHandler);
+const generateCombination = (id) => api.get(`${streamURL}/run/generate/${id}`).then(dataHandler);
+const runCombination = (id) => api.get(`${streamURL}/run/${id}`).then(dataHandler);
 
 export {
     getAllModelData,
@@ -46,5 +48,7 @@ export {
     getAllCombinationData,
     createCombination,
     deleteCombination,
-    getSingleCombinationData
+    getSingleCombinationData,
+    generateCombination,
+    runCombination
 };
