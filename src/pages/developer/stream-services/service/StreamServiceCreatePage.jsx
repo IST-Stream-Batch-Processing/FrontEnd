@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Title from "antd/es/typography/Title";
 import {
-Button, Divider, Form, Input, Layout, message, Radio, Steps, Switch
+Button, Divider, Form, Input, Layout, message, Radio, Select, Steps, Switch
 } from "antd";
 import {css} from "aphrodite";
 import Text from "antd/es/typography/Text";
@@ -12,7 +12,8 @@ import {
   createFDCOService,
   createKBDCService,
   createMCService,
-  createTWService
+  createTWService,
+  getAllCombinationData
 } from "../../../../api/stream";
 
 const {Step} = Steps;
@@ -26,7 +27,25 @@ class StreamServiceCreatePage extends Component {
       current: 0,
       selectedType: "",
       isRegex: false,
+      combinationData: [],
     };
+  }
+
+  componentDidMount() {
+    this.getCombinationData();
+  }
+
+  getCombinationData = () => {
+    try {
+      getAllCombinationData().then((result) => {
+        this.setState(state => ({
+            combinationData: result
+        }));
+      });
+    } catch (err) {
+      console.error(err);
+      message.error("获取编排信息失败！");
+    }
   }
 
   createService = async (e) => {
@@ -361,11 +380,13 @@ class StreamServiceCreatePage extends Component {
             {getFieldDecorator('combinationId', {
               rules: [
                 {
-                  required: false,
+                  required: true,
                 }
               ]
             })(
-              <Input placeholder="请输入所属 combination 的 Id" />
+              <Select placeholder="请选择所属 combination 的 Id">
+                {this.state.combinationData.map(item => <Select.Option value={item.id}>{item.id}</Select.Option>)}
+              </Select>
             )}
           </Form.Item>
           <Form.Item label="输入的具体类型">
