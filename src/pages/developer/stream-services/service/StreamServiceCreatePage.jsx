@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import Title from "antd/es/typography/Title";
 import {
-Button, Divider, Form, Input, Layout, message, Radio, Select, Steps, Switch
+Button, Divider, Form, Icon, Input, Layout, List, message, Radio, Select, Steps, Switch
 } from "antd";
 import {css} from "aphrodite";
 import Text from "antd/es/typography/Text";
+import {CloseCircleOutlined} from "@ant-design/icons";
 import styles from '../../../../constants/pageStyle';
 import history from "../../../../utils/history";
 import {
@@ -28,6 +29,7 @@ class StreamServiceCreatePage extends Component {
       selectedType: "",
       isRegex: false,
       combinationData: [],
+      dataList: []
     };
   }
 
@@ -39,7 +41,7 @@ class StreamServiceCreatePage extends Component {
     try {
       getAllCombinationData().then((result) => {
         this.setState(state => ({
-            combinationData: result
+          combinationData: result
         }));
       });
     } catch (err) {
@@ -54,6 +56,7 @@ class StreamServiceCreatePage extends Component {
       const data = this.props.form.getFieldsValue();
       switch (this.state.selectedType) {
         case "MapConstruct":
+          data.dataList = this.state.dataList;
           await createMCService(data);
           break;
         case "AscendingTimeStamp":
@@ -110,6 +113,30 @@ class StreamServiceCreatePage extends Component {
     </>
   )
 
+  changeAttribute = (e, param, index) => {
+    e.preventDefault();
+    const newList = this.state.dataList;
+    newList[index][`${param}`] = e.target.value;
+    this.setState(state => ({dataList: newList}));
+  }
+
+  removeAttribute = (e, deleteItem) => {
+    e.preventDefault();
+    const newList = this.state.dataList;
+    this.setState(state => ({dataList: newList.filter(item => item !== deleteItem)}));
+  }
+
+  addAttribute = (e) => {
+    e.preventDefault();
+    const newList = this.state.dataList;
+    this.setState(state => ({
+      dataList: newList.concat({
+        type: "string",
+        index: 0
+      })
+    }));
+  }
+
   MapConstructorItems = () => {
     const {getFieldDecorator} = this.props.form;
     return (
@@ -144,7 +171,9 @@ class StreamServiceCreatePage extends Component {
               }
             ]
           })(
-            <Input placeholder="请输入时间戳类型" />
+            <Select placeholder="请输入时间戳类型">
+              <Select.Option value="String">String</Select.Option>
+            </Select>
           )}
         </Form.Item>
         <Form.Item label="时间戳属性的格式">
@@ -166,9 +195,48 @@ class StreamServiceCreatePage extends Component {
               }
             ]
           })(
-            <Input placeholder="请输入时间戳在分割后字符串列表中的位置" />
+            <Input type="number" placeholder="请输入时间戳在分割后字符串列表中的位置" />
           )}
         </Form.Item>
+        <List
+          header="数据属性类型与其在数据流中的对应位置"
+          bordered
+          size="small"
+          dataSource={this.state.dataList}
+          renderItem={(item, index) => (
+            <List.Item key={index} style={{display: 'flex'}}>
+              <Input
+                size="large"
+                defaultValue={item.type}
+                onChange={(e) => this.changeAttribute(e, "type", index)}
+              />
+              <Divider type="vertical" />
+              <Input
+                size="large"
+                defaultValue={item.index}
+                onChange={(e) => this.changeAttribute(e, "index", index)}
+                type="number"
+              />
+              <Divider type="vertical" />
+              <CloseCircleOutlined
+                style={{color: 'red', fontSize: '20px'}}
+                onClick={(e) => {
+                  this.removeAttribute(e, item);
+                }}
+              />
+            </List.Item>
+          )}
+        />
+        <Button
+          type="dashed"
+          onClick={(e) => {
+            this.addAttribute(e);
+          }}
+          style={{width: '100%', marginTop: '20px'}}
+        >
+          <Icon type="plus" />
+          创建
+        </Button>
       </>
     );
   }
@@ -394,8 +462,9 @@ class StreamServiceCreatePage extends Component {
               rules: [
                 {
                   required: false,
+                  initialValue: "String"
                 }
-              ]
+              ],
             })(
               <Input placeholder="请输入用户需要输入的具体类型" />
             )}
@@ -405,6 +474,7 @@ class StreamServiceCreatePage extends Component {
               rules: [
                 {
                   required: false,
+                  initialValue: "String"
                 }
               ]
             })(
