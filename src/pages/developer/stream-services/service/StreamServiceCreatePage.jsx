@@ -114,9 +114,8 @@ class StreamServiceCreatePage extends Component {
   )
 
   changeAttribute = (e, param, index) => {
-    e.preventDefault();
     const newList = this.state.dataList;
-    newList[index][`${param}`] = e.target.value;
+    newList[index][`${param}`] = e;
     this.setState(state => ({dataList: newList}));
   }
 
@@ -131,7 +130,7 @@ class StreamServiceCreatePage extends Component {
     const newList = this.state.dataList;
     this.setState(state => ({
       dataList: newList.concat({
-        type: "string",
+        type: "String",
         index: 0
       })
     }));
@@ -205,11 +204,15 @@ class StreamServiceCreatePage extends Component {
           dataSource={this.state.dataList}
           renderItem={(item, index) => (
             <List.Item key={index} style={{display: 'flex'}}>
-              <Input
+              <Select
                 size="large"
                 defaultValue={item.type}
                 onChange={(e) => this.changeAttribute(e, "type", index)}
-              />
+              >
+                <Select.Option value="String">String</Select.Option>
+                <Select.Option value="Integer">Integer</Select.Option>
+                <Select.Option value="Long">Long</Select.Option>
+              </Select>
               <Divider type="vertical" />
               <Input
                 size="large"
