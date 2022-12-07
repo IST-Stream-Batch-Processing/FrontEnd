@@ -6,7 +6,7 @@ Button, Divider, Form, Layout, message, Modal, Select, Table
 import {NavLink} from "react-router-dom";
 import {
 createCombination, deleteCombination, getAllCombinationData, getAllModelData
-} from "../../../api/stream";
+} from "../../../../api/stream";
 
 const {Column} = Table;
 

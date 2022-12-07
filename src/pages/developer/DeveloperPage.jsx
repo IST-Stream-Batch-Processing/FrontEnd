@@ -25,7 +25,8 @@ import StreamModelDataPage from "./stream-services/model/StreamModelDataPage";
 import StreamModelEditPage from "./stream-services/model/StreamModelEditPage";
 import StreamServiceCreatePage from "./stream-services/service/StreamServiceCreatePage";
 import StreamServiceEditPage from "./stream-services/service/StreamServiceEditPage";
-import StreamCombinationPage from "./stream-services/StreamCombinationPage";
+import StreamCombinationPage from "./stream-services/combination/StreamCombinationPage";
+import StreamCombinationEditPage from "./stream-services/combination/StreamCombinationEditPage";
 
 const routes = (match) => [
   {
@@ -157,6 +158,11 @@ const routes = (match) => [
     key: 'streamProcessCombinationPage',
     path: `${match.url}/streamProcess/combination`,
     component: StreamCombinationPage,
+  },
+  {
+    key: 'streamProcessCombinationEditPage',
+    path: `${match.url}/streamProcess/combination/edit/:id`,
+    component: StreamCombinationEditPage,
   },
 ];
 

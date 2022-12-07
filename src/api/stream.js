@@ -27,6 +27,7 @@ const createTWService = (data) => api.post(`${streamURL}/timeWindow`, data).then
 const getAllCombinationData = () => api.get(`${streamURL}/combination`).then(dataHandler);
 const createCombination = (id) => api.post(`${streamURL}/combination/${id}`).then(dataHandler);
 const deleteCombination = (id) => api.delete(`${streamURL}/combination/${id}`).then(dataHandler);
+const getSingleCombinationData = (id) => api.get(`${streamURL}/combination/${id}`).then(dataHandler);
 
 export {
     getAllModelData,
@@ -44,5 +45,6 @@ export {
     createTWService,
     getAllCombinationData,
     createCombination,
-    deleteCombination
+    deleteCombination,
+    getSingleCombinationData
 };
