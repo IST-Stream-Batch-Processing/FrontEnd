@@ -95,7 +95,7 @@ class StreamCombinationEditPage extends React.Component {
             dataSource={this.state.data.operatorIds}
             renderItem={(item, index) => (
               <List.Item key={index} style={{display: 'flex'}}>
-                {index}
+                {index + 1}
                 <Divider type="vertical" />
                 {item}
                 <Divider type="vertical" />
