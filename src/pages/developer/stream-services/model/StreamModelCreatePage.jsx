@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-Button, Divider, Form, Icon, Input, Layout, List, message, Switch
+Button, Divider, Form, Icon, Input, Layout, List, message, Select, Switch
 } from 'antd';
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
@@ -34,9 +34,8 @@ class StreamModelCreatePage extends React.Component {
   }
 
   changeAttribute = (e, param, index) => {
-    e.preventDefault();
     const newList = this.state.attributeList;
-    newList[index][`${param}`] = e.target.value;
+    newList[index][`${param}`] = e;
     this.setState(state => ({attributeList: newList}));
   }
 
@@ -51,7 +50,7 @@ class StreamModelCreatePage extends React.Component {
     const newList = this.state.attributeList;
     this.setState(state => ({
       attributeList: newList.concat({
-        type: "string",
+        type: "String",
         name: "default"
       })
     }));
@@ -132,11 +131,15 @@ class StreamModelCreatePage extends React.Component {
             dataSource={this.state.attributeList}
             renderItem={(item, index) => (
               <List.Item key={index} style={{display: 'flex'}}>
-                <Input
+                <Select
                   size="large"
                   defaultValue={item.type}
                   onChange={(e) => this.changeAttribute(e, "type", index)}
-                />
+                >
+                  <Select.Option value="String">String</Select.Option>
+                  <Select.Option value="Integer">Integer</Select.Option>
+                  <Select.Option value="Long">Long</Select.Option>
+                </Select>
                 <Divider type="vertical" />
                 <Input
                   size="large"
