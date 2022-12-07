@@ -385,7 +385,13 @@ class StreamServiceCreatePage extends Component {
               }
             ]
           })(
-            <Input placeholder="请输入窗口长度单位" />
+            <Select placeholder="请输入窗口长度单位">
+              <Select.Option value="day">天</Select.Option>
+              <Select.Option value="hour">小时</Select.Option>
+              <Select.Option value="minute">分钟</Select.Option>
+              <Select.Option value="second">秒</Select.Option>
+              <Select.Option value="millisecond">毫秒</Select.Option>
+            </Select>
           )}
         </Form.Item>
         <Form.Item label="窗口长度">
