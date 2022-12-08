@@ -23,6 +23,9 @@ const createATService = (data) => api.post(`${streamURL}/ascendingTimeStamp`, da
 const createFDCOService = (data) => api.post(`${streamURL}/filterDataClassOne`, data).then(dataHandler);
 const createKBDCService = (data) => api.post(`${streamURL}/keyByDataClass`, data).then(dataHandler);
 const createTWService = (data) => api.post(`${streamURL}/timeWindow`, data).then(dataHandler);
+const createWVCService = (data) => api.post(`${streamURL}/windowViewCount`, data).then(dataHandler);
+const createAGGService = (data) => api.post(`${streamURL}/aggregate`, data).then(dataHandler);
+const createPLSService = (data) => api.post(`${streamURL}/processListState`, data).then(dataHandler);
 
 const getAllCombinationData = () => api.get(`${streamURL}/combination`).then(dataHandler);
 const createCombination = (data) => api.post(`${streamURL}/combination`, data).then(dataHandler);
@@ -50,5 +53,8 @@ export {
     deleteCombination,
     getSingleCombinationData,
     generateCombination,
-    runCombination
+    runCombination,
+    createWVCService,
+    createAGGService,
+    createPLSService
 };

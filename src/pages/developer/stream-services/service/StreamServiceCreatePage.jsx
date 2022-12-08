@@ -1,7 +1,19 @@
 import React, {Component} from 'react';
 import Title from "antd/es/typography/Title";
 import {
-Button, Divider, Form, Icon, Input, Layout, List, message, Radio, Select, Steps, Switch
+  Button,
+  Descriptions,
+  Divider,
+  Form,
+  Icon,
+  Input,
+  Layout,
+  List,
+  message,
+  Radio,
+  Select,
+  Steps,
+  Switch
 } from "antd";
 import {css} from "aphrodite";
 import Text from "antd/es/typography/Text";
@@ -9,11 +21,14 @@ import {CloseCircleOutlined} from "@ant-design/icons";
 import styles from '../../../../constants/pageStyle';
 import history from "../../../../utils/history";
 import {
+  createAGGService,
   createATService,
   createFDCOService,
   createKBDCService,
   createMCService,
+  createPLSService,
   createTWService,
+  createWVCService,
   getAllCombinationData
 } from "../../../../api/stream";
 
@@ -71,6 +86,17 @@ class StreamServiceCreatePage extends Component {
         case "TimeWindow":
           await createTWService(data);
           break;
+        case "WindowViewCount":
+          data.attributeList = this.state.dataList;
+          console.log(data);
+          await createWVCService(data);
+          break;
+        case "Aggregate":
+          await createAGGService(data);
+          break;
+        case "ProcessListState":
+          await createPLSService(data);
+          break;
         default:
           break;
       }
@@ -109,6 +135,9 @@ class StreamServiceCreatePage extends Component {
         </Radio.Button>
         <Radio.Button className={css(styles.radioButtons)} value="KeyByDataClass">Key By Data Class</Radio.Button>
         <Radio.Button className={css(styles.radioButtons)} value="TimeWindow">Time Window</Radio.Button>
+        <Radio.Button className={css(styles.radioButtons)} value="WindowViewCount">WindowViewCount</Radio.Button>
+        <Radio.Button className={css(styles.radioButtons)} value="Aggregate">Aggregate</Radio.Button>
+        <Radio.Button className={css(styles.radioButtons)} value="ProcessListState">ProcessListState</Radio.Button>
       </Radio.Group>
     </>
   )
@@ -217,7 +246,7 @@ class StreamServiceCreatePage extends Component {
               <Input
                 size="large"
                 defaultValue={item.index}
-                onChange={(e) => this.changeAttribute(e, "index", index)}
+                onChange={(e) => this.changeAttribute(e.target.value, "index", index)}
                 type="number"
               />
               <Divider type="vertical" />
@@ -445,6 +474,176 @@ class StreamServiceCreatePage extends Component {
     );
   }
 
+  WindowViewCountItems = () => {
+    const {getFieldDecorator} = this.props.form;
+    return (
+      <>
+        <Form.Item label="名称">
+          {getFieldDecorator('className', {
+            rules: [
+              {
+                required: true,
+                initialValue: "WindowViewCount"
+              }
+            ]
+          })(
+            <Input placeholder="请输入名称" />
+          )}
+        </Form.Item>
+        <Form.Item label="key名称">
+          {getFieldDecorator('keyName', {
+            rules: [
+              {
+                required: true,
+              }
+            ]
+          })(
+            <Input placeholder="请输入key名称" />
+          )}
+        </Form.Item>
+        <Form.Item label="key的数据类型">
+          {getFieldDecorator('keyType', {
+            rules: [
+              {
+                required: true,
+              }
+            ]
+          })(
+            <Input placeholder="请输入key的数据类型" />
+          )}
+        </Form.Item>
+        <List
+          header="Attribute List"
+          bordered
+          size="small"
+          dataSource={this.state.dataList}
+          renderItem={(item, index) => (
+            <List.Item key={index} style={{display: 'flex'}}>
+              <Select
+                size="large"
+                defaultValue={item.type}
+                onChange={(e) => this.changeAttribute(e, "type", index)}
+              >
+                <Select.Option value="String">String</Select.Option>
+                <Select.Option value="Integer">Integer</Select.Option>
+                <Select.Option value="Long">Long</Select.Option>
+              </Select>
+              <Divider type="vertical" />
+              <Input
+                size="large"
+                defaultValue={item.name}
+                onChange={(e) => this.changeAttribute(e.target.value, "name", index)}
+              />
+              <Divider type="vertical" />
+              <CloseCircleOutlined
+                style={{color: 'red', fontSize: '20px'}}
+                onClick={(e) => {
+                  this.removeAttribute(e, item);
+                }}
+              />
+            </List.Item>
+          )}
+        />
+        <Button
+          type="dashed"
+          onClick={(e) => {
+            this.addAttribute(e);
+          }}
+          style={{width: '100%', marginTop: '20px'}}
+        >
+          <Icon type="plus" />
+          创建
+        </Button>
+      </>
+    );
+  }
+
+  AggregateItems = () => {
+    const {getFieldDecorator} = this.props.form;
+    return (
+      <>
+        <Form.Item label="key的数据类型">
+          {getFieldDecorator('keyType', {
+            rules: [
+              {
+                required: true,
+              }
+            ]
+          })(
+            <Input placeholder="请输入key的数据类型" />
+          )}
+        </Form.Item>
+        <Descriptions title="规则说明" bordered layout="vertical" column={1}>
+          <Descriptions.Item label="accumulator累加器初始化">0</Descriptions.Item>
+          <Descriptions.Item label="accumulator累加规则">accumulator = accumulator + 1</Descriptions.Item>
+        </Descriptions>
+      </>
+    );
+  }
+
+  ProcessListStateItems = () => {
+    const {getFieldDecorator} = this.props.form;
+    return (
+      <>
+        <Form.Item label="key的数据类型">
+          {getFieldDecorator('keyType', {
+            rules: [
+              {
+                required: true,
+              }
+            ]
+          })(
+            <Input placeholder="请输入key的数据类型" />
+          )}
+        </Form.Item>
+        <Form.Item label="是否全部输出前N">
+          {getFieldDecorator('isTop', {
+            rules: [
+              {
+                required: false,
+              }
+            ]
+          })(
+            <Switch />
+          )}
+        </Form.Item>
+        <Form.Item label="Top Size">
+          {getFieldDecorator('topSize', {
+            rules: [
+              {
+                required: true,
+              }
+            ]
+          })(
+            <Input placeholder="请输入Top Size" type="number" />
+          )}
+        </Form.Item>
+        <Form.Item label="是否排序">
+          {getFieldDecorator('isSort', {
+            rules: [
+              {
+                required: false,
+              }
+            ]
+          })(
+            <Switch />
+          )}
+        </Form.Item>
+        <Form.Item label="是否从大到小排">
+          {getFieldDecorator('isDescending', {
+            rules: [
+              {
+                required: false,
+              }
+            ]
+          })(
+            <Switch />
+          )}
+        </Form.Item>
+      </>
+    );
+  }
+
   // 生成不同算子的Form
   getOperationForm = () => {
     const {getFieldDecorator} = this.props.form;
@@ -495,6 +694,9 @@ class StreamServiceCreatePage extends Component {
           {this.state.selectedType === "FilterDataClassOne" ? this.FDCOItems() : null}
           {this.state.selectedType === "KeyByDataClass" ? this.KBDCItems() : null}
           {this.state.selectedType === "TimeWindow" ? this.TimeWindowItems() : null}
+          {this.state.selectedType === "WindowViewCount" ? this.WindowViewCountItems() : null}
+          {this.state.selectedType === "Aggregate" ? this.AggregateItems() : null}
+          {this.state.selectedType === "ProcessListState" ? this.ProcessListStateItems() : null}
         </Form>
       </>
     );
