@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Title from "antd/es/typography/Title";
 import {
-Button, Divider, Form, Layout, message, Modal, Select, Table
+Button, Divider, Form, Input, Layout, message, Modal, Select, Table
 } from "antd";
 import {NavLink} from "react-router-dom";
 import {
@@ -23,6 +23,7 @@ class StreamCombinationPage extends Component {
       visible: false,
       modelData: [],
       newDataId: null,
+      newCombinationName: null
     };
   }
 
@@ -70,7 +71,11 @@ class StreamCombinationPage extends Component {
 
   handleOk = e => {
     try {
-      createCombination(this.state.newDataId).then(() => {
+      const data = {
+        dataId: this.state.newDataId,
+        name: this.state.newCombinationName
+      };
+      createCombination(data).then(() => {
         message.success("创建成功！");
         this.getAllData();
       });
@@ -102,7 +107,7 @@ class StreamCombinationPage extends Component {
     return (
       <Layout>
         <div style={{flexDirection: 'row', display: 'flex'}}>
-          <Title level={4}>流数据源</Title>
+          <Title level={4}>流数据源编排</Title>
           <Button
             type="primary"
             style={{marginLeft: "auto"}}
@@ -114,6 +119,7 @@ class StreamCombinationPage extends Component {
         </div>
         <Divider />
         <Table dataSource={this.state.data} size="small">
+          <Column title="编排名称" dataIndex="name" key="name" />
           <Column title="编排id" dataIndex="id" key="id" />
           <Column title="对应的数据源" dataIndex="dataId" key="dataId" />
           <Column
@@ -124,9 +130,11 @@ class StreamCombinationPage extends Component {
                 <Button onClick={() => { generateCombination(record.id); }}>
                   生成
                 </Button>
+                <Divider type="vertical" />
                 <Button onClick={() => { runCombination(record.id); }}>
                   执行
                 </Button>
+                <Divider type="vertical" />
                 <Button>
                     <NavLink to={`/developer/streamProcess/combination/edit/${record.id}`}>
                         编辑
@@ -150,6 +158,7 @@ class StreamCombinationPage extends Component {
           <Select placeholder="请选择数据源" style={{ width: "100%" }} onChange={this.handleChange}>
             {this.state.modelData.map(model => <Select.Option value={model.id}>{model.className}</Select.Option>)}
           </Select>
+          <Input placeholder="请输入编排名称" required onChange={(e) => { this.setState(state => ({newCombinationName: e.target.value})); }} />
         </Modal>
       </Layout>
     );

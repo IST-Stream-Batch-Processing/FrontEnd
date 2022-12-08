@@ -25,7 +25,7 @@ const createKBDCService = (data) => api.post(`${streamURL}/keyByDataClass`, data
 const createTWService = (data) => api.post(`${streamURL}/timeWindow`, data).then(dataHandler);
 
 const getAllCombinationData = () => api.get(`${streamURL}/combination`).then(dataHandler);
-const createCombination = (id) => api.post(`${streamURL}/combination/${id}`).then(dataHandler);
+const createCombination = (data) => api.post(`${streamURL}/combination`, data).then(dataHandler);
 const deleteCombination = (id) => api.delete(`${streamURL}/combination/${id}`).then(dataHandler);
 const getSingleCombinationData = (id) => api.get(`${streamURL}/combination/${id}`).then(dataHandler);
 const generateCombination = (id) => api.get(`${streamURL}/run/generate/${id}`).then(dataHandler);
