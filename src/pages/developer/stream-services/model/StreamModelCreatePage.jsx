@@ -27,6 +27,7 @@ class StreamModelCreatePage extends React.Component {
       data.userId = getUserId(getToken());
       data.isTimeStamp = this.state.isTimeStamp;
       data.attributeList = this.state.attributeList;
+      console.log(data);
       await createModelData(data);
     } catch (err) {
       console.error(err);
@@ -37,6 +38,7 @@ class StreamModelCreatePage extends React.Component {
     const newList = this.state.attributeList;
     newList[index][`${param}`] = e;
     this.setState(state => ({attributeList: newList}));
+    console.log(this.state.attributeList);
   }
 
   removeAttribute = (e, deleteItem) => {
@@ -144,7 +146,7 @@ class StreamModelCreatePage extends React.Component {
                 <Input
                   size="large"
                   defaultValue={item.name}
-                  onChange={(e) => this.changeAttribute(e, "name", index)}
+                  onChange={(e) => this.changeAttribute(e.target.value, "name", index)}
                 />
                 <Divider type="vertical" />
                 <CloseCircleOutlined

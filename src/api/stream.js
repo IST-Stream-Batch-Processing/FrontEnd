@@ -26,6 +26,8 @@ const createTWService = (data) => api.post(`${streamURL}/timeWindow`, data).then
 const createWVCService = (data) => api.post(`${streamURL}/windowViewCount`, data).then(dataHandler);
 const createAGGService = (data) => api.post(`${streamURL}/aggregate`, data).then(dataHandler);
 const createPLSService = (data) => api.post(`${streamURL}/processListState`, data).then(dataHandler);
+const createMAKBYService = (data) => api.post(`${streamURL}/mapAndKeyByRandom`, data).then(dataHandler);
+const createPVLService = (data) => api.post(`${streamURL}/processValueState`, data).then(dataHandler);
 
 const getAllCombinationData = () => api.get(`${streamURL}/combination`).then(dataHandler);
 const createCombination = (data) => api.post(`${streamURL}/combination`, data).then(dataHandler);
@@ -56,5 +58,7 @@ export {
     runCombination,
     createWVCService,
     createAGGService,
-    createPLSService
+    createPLSService,
+    createMAKBYService,
+    createPVLService
 };

@@ -25,8 +25,10 @@ import {
   createATService,
   createFDCOService,
   createKBDCService,
+  createMAKBYService,
   createMCService,
   createPLSService,
+  createPVLService,
   createTWService,
   createWVCService,
   getAllCombinationData
@@ -97,6 +99,12 @@ class StreamServiceCreatePage extends Component {
         case "ProcessListState":
           await createPLSService(data);
           break;
+        case "MapAndKeyByRandom":
+          await createMAKBYService(data);
+          break;
+        case "ProcessValueState":
+          await createPVLService(data);
+          break;
         default:
           break;
       }
@@ -138,6 +146,8 @@ class StreamServiceCreatePage extends Component {
         <Radio.Button className={css(styles.radioButtons)} value="WindowViewCount">WindowViewCount</Radio.Button>
         <Radio.Button className={css(styles.radioButtons)} value="Aggregate">Aggregate</Radio.Button>
         <Radio.Button className={css(styles.radioButtons)} value="ProcessListState">ProcessListState</Radio.Button>
+        <Radio.Button className={css(styles.radioButtons)} value="MapAndKeyByRandom">MapAndKeyByRandom</Radio.Button>
+        <Radio.Button className={css(styles.radioButtons)} value="ProcessValueState">ProcessValueState</Radio.Button>
       </Radio.Group>
     </>
   )
@@ -201,6 +211,8 @@ class StreamServiceCreatePage extends Component {
           })(
             <Select placeholder="请输入时间戳类型">
               <Select.Option value="String">String</Select.Option>
+              <Select.Option value="String">Integer</Select.Option>
+              <Select.Option value="String">Long</Select.Option>
             </Select>
           )}
         </Form.Item>
@@ -644,6 +656,44 @@ class StreamServiceCreatePage extends Component {
     );
   }
 
+  MapAndKeyByRandomItems = () => {
+    const {getFieldDecorator} = this.props.form;
+    return (
+      <>
+        <Form.Item label="随机值">
+          {getFieldDecorator('randomSize', {
+            rules: [
+              {
+                required: true,
+              }
+            ]
+          })(
+            <Input placeholder="请输入随机值的大小" />
+          )}
+        </Form.Item>
+      </>
+    );
+  }
+
+  ProcessValueStateItems = () => {
+    const {getFieldDecorator} = this.props.form;
+    return (
+      <>
+        <Form.Item label="key的数据类型">
+          {getFieldDecorator('keyType', {
+            rules: [
+              {
+                required: true,
+              }
+            ]
+          })(
+            <Input placeholder="请输入key的数据类型" />
+          )}
+        </Form.Item>
+      </>
+    );
+  }
+
   // 生成不同算子的Form
   getOperationForm = () => {
     const {getFieldDecorator} = this.props.form;
@@ -661,7 +711,7 @@ class StreamServiceCreatePage extends Component {
               ]
             })(
               <Select placeholder="请选择所属 combination 的 Id">
-                {this.state.combinationData.map(item => <Select.Option value={item.id}>{item.id}</Select.Option>)}
+                {this.state.combinationData.map(item => <Select.Option value={item.id}>{item.name}</Select.Option>)}
               </Select>
             )}
           </Form.Item>
@@ -697,6 +747,8 @@ class StreamServiceCreatePage extends Component {
           {this.state.selectedType === "WindowViewCount" ? this.WindowViewCountItems() : null}
           {this.state.selectedType === "Aggregate" ? this.AggregateItems() : null}
           {this.state.selectedType === "ProcessListState" ? this.ProcessListStateItems() : null}
+          {this.state.selectedType === "MapAndKeyByRandom" ? this.MapAndKeyByRandomItems() : null}
+          {this.state.selectedType === "ProcessValueState" ? this.ProcessValueStateItems() : null}
         </Form>
       </>
     );

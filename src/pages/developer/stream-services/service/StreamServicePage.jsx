@@ -22,6 +22,7 @@ class StreamServicePage extends React.Component {
         this.setState(state => ({
           data: result
         }));
+        console.log(result);
       });
     } catch (err) {
       console.error(err);
@@ -68,8 +69,8 @@ class StreamServicePage extends React.Component {
           <Column title="类型" dataIndex="name" key="name" />
           <Column title="originalType" dataIndex="originalType" key="originalType" />
           <Column title="finalType" dataIndex="finalType" key="finalType" />
-          <Column title="input" dataIndex="input" key="input" />
-          <Column title="output" dataIndex="input" key="output" />
+          {/* <Column title="input" dataIndex="input" key="input" /> */}
+          {/* <Column title="output" dataIndex="input" key="output" /> */}
           <Column title="inputType" dataIndex="inputType" key="inputType" />
           <Column title="outputType" dataIndex="outputType" key="outputType" />
           <Column
